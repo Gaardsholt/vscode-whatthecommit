@@ -19,8 +19,7 @@ jobs:
           command: vsce package
       - run:
           name: Publish to marketplace
-          command: vsce publish
-          # command: vsce publish -p $VSTOKEN
+          command: vsce publish -p $VS_TOKEN
 
 workflows:
   build-deploy:
