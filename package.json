@@ -1,0 +1,53 @@
+{
+	"name": "vscode-whatthecommit",
+	"displayName": "WhatTheCommit",
+	"description": "Fetch your next commit message from WhatTheCommit.com",
+	"version": "0.0.1",
+	"publisher": "Gaardsholt",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"SCM Providers"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/main.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.wtc.getCommitMessage",
+				"title": "Get Commit Message",
+				"category": "WhatTheCommit",
+				"icon": {
+					"light": "resources/icons/light/ghost.svg",
+					"dark": "resources/icons/dark/ghost.svg"
+				}
+			}
+		],
+		"menus": {
+			"scm/title": [
+				{
+					"command": "extension.wtc.getCommitMessage",
+					"group": "navigation",
+					"when": "scmProvider == git"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "12.7.8",
+		"typescript": "3.6.3",
+		"@types/vscode": "1.38.0"
+	},
+	"dependencies": {
+		"request": "^2.88.0",
+		"request-promise": "^4.2.4"
+	}
+}
