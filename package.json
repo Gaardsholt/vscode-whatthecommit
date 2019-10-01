@@ -4,6 +4,7 @@
 	"description": "Fetch your next commit message from WhatTheCommit.com",
 	"version": "0.0.1",
 	"publisher": "Gaardsholt",
+	"repository": {"url": "https://github.com/Gaardsholt/vscode-whatthecommit"},
 	"engines": {
 		"vscode": "^1.38.0"
 	},
