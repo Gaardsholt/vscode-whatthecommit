@@ -13,7 +13,7 @@ jobs:
           command: npm run compile
       - run:
           name: install VS Code Extension Manager
-          command: npm i vsce -g
+          command: sudo npm i vsce -g
       - run:
           name: publish to marketplace
           command: vsce publish -p $VSTOKEN
