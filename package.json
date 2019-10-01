@@ -5,7 +5,7 @@
 	"version": "0.0.1",
 	"publisher": "Gaardsholt",
 	"engines": {
-		"vscode": "^1.32.0"
+		"vscode": "^1.38.0"
 	},
 	"categories": [
 		"SCM Providers"
