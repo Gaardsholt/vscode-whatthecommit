@@ -7,6 +7,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand("extension.wtc.getCommitMessage",
 		async (sourceControlPane: vscode.SourceControl) => {
+			// vscode.window.showInformationMessage("Does it work?");
 			rp({ uri: 'http://whatthecommit.com/index.json', json: true })
 				.then(function (htmlString: wtcJson) {
 					// vscode.window.showInformationMessage(htmlString.commit_message);

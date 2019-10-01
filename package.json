@@ -30,7 +30,7 @@
 			"scm/title": [
 				{
 					"command": "extension.wtc.getCommitMessage",
-					"group": "navigation",
+					"group": "navigation@9",
 					"when": "scmProvider == git"
 				}
 			]

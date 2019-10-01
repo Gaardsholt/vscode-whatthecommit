@@ -1,0 +1,34 @@
+version: 2.1
+orbs:
+  launchdarkly: launchdarkly/ld-find-code-refs@1.3.0
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.0-browsers
+    steps:
+      - checkout
+      - run:
+          name: Restore dependencies
+          command: npm install
+      - run:
+          name: Compile
+          command: npm run compile
+      - run:
+          name: Package extension
+          command: |
+            npm install -g vsce
+            vsce publish
+
+workflows:
+  deploy:
+    jobs:
+      - build:
+          name: build
+          filters:
+            branches:
+              only:
+                - master
+      # - deploy:
+      #     name: deploy-test
+      #     requires:
+      #       - build
