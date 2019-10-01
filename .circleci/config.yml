@@ -6,17 +6,21 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Restore dependencies
+          name: Install
           command: npm install
       - run:
           name: Compile
           command: npm run compile
       - run:
-          name: install VS Code Extension Manager
+          name: Install VS Code Extension Manager
           command: sudo npm i vsce -g
       - run:
-          name: publish to marketplace
-          command: vsce publish -p $VSTOKEN
+          name: Package extension
+          command: vsce package
+      - run:
+          name: Publish to marketplace
+          command: vsce publish
+          # command: vsce publish -p $VSTOKEN
 
 workflows:
   build-deploy:
