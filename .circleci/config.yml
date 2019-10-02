@@ -48,7 +48,7 @@ commands:
 
 jobs:
   test:
-    executor: azure_cli
+    executor: node_image
     steps:
       - checkout
       - update_version
@@ -57,8 +57,7 @@ jobs:
       - vsce_install
       - vsce_package
   build:
-    docker:
-      - image: circleci/node:latest
+    executor: node_image
     steps:
       - checkout
       - update_version
@@ -69,14 +68,15 @@ jobs:
       - vsce_publish
 
 workflows:
-  jobs:
-    - test:
-        name: test
-        filters:
-          branches:
-            only: master
-          tags:
-            ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+  tester:
+    jobs:
+      - test:
+          name: test
+          filters:
+            branches:
+              only: master
+            tags:
+              ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
   build-deploy:
     jobs:
       - build:
