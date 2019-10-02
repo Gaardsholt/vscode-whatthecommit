@@ -71,12 +71,12 @@ jobs:
 workflows:
   jobs:
     - test:
-      name: test
-      filters:
-        branches:
-          only: master
-        tags:
-          ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+        name: test
+        filters:
+          branches:
+            only: master
+          tags:
+            ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
   build-deploy:
     jobs:
       - build:
