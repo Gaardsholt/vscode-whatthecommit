@@ -1,33 +1,83 @@
 version: 2.1
-jobs:
-  build:
+
+executors:
+  node_image:
     docker:
       - image: circleci/node:latest
+
+commands:
+  update_version:
+    description: Will update package.json with tag of the commit
     steps:
-      - checkout
       - run:
           name: Update version
           command: |
             envsubst < ./package.json > ./package_var.json
             rm ./package.json
             mv ./package_var.json ./package.json
+  install_dependencies:
+    description: Will install dependencies
+    steps:
       - run:
           name: Install
           command: npm install
+  compile:
+    description: Will compile
+    steps:
       - run:
           name: Compile
           command: npm run compile
+  vsce_install:
+    description: Install VS Code Extension Manager
+    steps:
       - run:
           name: Install VS Code Extension Manager
           command: sudo npm i vsce -g
+  vsce_package:
+    description: Packge vscode extension
+    steps:
       - run:
-          name: Package extension
+          name: Packge vscode extension
           command: vsce package
+  vsce_publish:
+    description: Publish to marketplace
+    steps:
       - run:
           name: Publish to marketplace
           command: vsce publish -p $VS_TOKEN
 
+jobs:
+  test:
+    executor: azure_cli
+    steps:
+      - checkout
+      - update_version
+      - install_dependencies
+      - compile
+      - vsce_install
+      - vsce_package
+  build:
+    docker:
+      - image: circleci/node:latest
+    steps:
+      - checkout
+      - update_version
+      - install_dependencies
+      - compile
+      - vsce_install
+      - vsce_package
+      - vsce_publish
+
 workflows:
+  tester:
+    jobs:
+      - test:
+        name: test
+        filters:
+          branches:
+            only: master
+          tags:
+            ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
   build-deploy:
     jobs:
       - build:
