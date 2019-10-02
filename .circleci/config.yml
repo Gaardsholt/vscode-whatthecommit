@@ -62,8 +62,6 @@ jobs:
       - update_version
       - install_dependencies
       - compile
-      - vsce_install
-      - vsce_package
   build:
     executor: node_image
     steps:
