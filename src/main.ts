@@ -7,14 +7,14 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand("extension.wtc.getCommitMessage",
 		async (sourceControlPane: vscode.SourceControl) => {
-			// vscode.window.showInformationMessage("Does it work?");
+			// vscode.window.showInformationMessage("Fetching commit message...");
 			rp({ uri: 'http://whatthecommit.com/index.json', json: true })
 				.then(function (htmlString: wtcJson) {
-					// vscode.window.showInformationMessage(htmlString.commit_message);
 					sourceControlPane.inputBox.value = htmlString.commit_message;
+					// vscode.window.showInformationMessage(htmlString.commit_message);
 				})
 				.catch(function (err) {
-					vscode.window.showInformationMessage(err);
+					vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err, {modal: true});
 				});
 		}));
 }

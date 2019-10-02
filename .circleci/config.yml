@@ -6,6 +6,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Update version
+          command: |
+            envsubst < ./package.json > ./package_var.json
+            rm ./package.json
+            mv ./package_var.json ./package.json
+      - run:
           name: Install
           command: npm install
       - run:
@@ -28,9 +34,6 @@ workflows:
           name: build
           filters:
             branches:
-              only:
-                - master
-      # - deploy:
-      #     name: deploy-test
-      #     requires:
-      #       - build
+              ignore: /.*/
+            tags:
+              only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
