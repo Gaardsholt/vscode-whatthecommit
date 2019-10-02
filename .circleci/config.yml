@@ -12,7 +12,7 @@ commands:
       - run:
           name: Install envsubst
           command: |
-            apt install gettext
+            sudo apt install gettext
   update_version:
     description: Will update package.json with tag of the commit
     steps:
