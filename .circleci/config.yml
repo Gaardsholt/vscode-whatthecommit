@@ -12,8 +12,7 @@ commands:
       - run:
           name: Install envsubst
           command: |
-            apk update
-            apk add gettext
+            apt install gettext
   update_version:
     description: Will update package.json with tag of the commit
     steps:
