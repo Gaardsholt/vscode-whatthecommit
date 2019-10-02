@@ -6,6 +6,14 @@ executors:
       - image: circleci/node:latest
 
 commands:
+  install_envsubst:
+    description: Will install the package envsubst
+    steps:
+      - run:
+          name: Install envsubst
+          command: |
+            apk update
+            apk add gettext
   update_version:
     description: Will update package.json with tag of the commit
     steps:
@@ -51,6 +59,7 @@ jobs:
     executor: node_image
     steps:
       - checkout
+      - install_envsubst
       - update_version
       - install_dependencies
       - compile
@@ -60,6 +69,7 @@ jobs:
     executor: node_image
     steps:
       - checkout
+      - install_envsubst
       - update_version
       - install_dependencies
       - compile
