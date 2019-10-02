@@ -69,15 +69,14 @@ jobs:
       - vsce_publish
 
 workflows:
-  tester:
-    jobs:
-      - test:
-        name: test
-        filters:
-          branches:
-            only: master
-          tags:
-            ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+  jobs:
+    - test:
+      name: test
+      filters:
+        branches:
+          only: master
+        tags:
+          ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
   build-deploy:
     jobs:
       - build:
