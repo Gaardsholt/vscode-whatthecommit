@@ -93,3 +93,5 @@ workflows:
           filters:
             tags:
               only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+            branches:
+              ignore: /.*/
