@@ -82,8 +82,8 @@ workflows:
       - test:
           name: test
           filters:
-            branches:
-              only: master
+            tags:
+              only: /.*/
       - build:
           name: build
           requires:
