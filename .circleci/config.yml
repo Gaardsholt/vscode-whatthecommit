@@ -19,9 +19,11 @@ commands:
       - run:
           name: Update version
           command: |
+            cat ./package.json
             envsubst < ./package.json > ./package_var.json
             rm ./package.json
             mv ./package_var.json ./package.json
+            cat ./package.json
   install_dependencies:
     description: Will install dependencies
     steps:
