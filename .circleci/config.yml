@@ -90,6 +90,6 @@ workflows:
             - test
           filters:
             tags:
-              only: /^v.*/
+              only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
             branches:
               ignore: /.*/
