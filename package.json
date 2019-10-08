@@ -30,8 +30,8 @@
 				"title": "Get Commit Message",
 				"category": "WhatTheCommit",
 				"icon": {
-					"light": "resources/icons/light/ghost.svg",
-					"dark": "resources/icons/dark/ghost.svg"
+					"light": "resources/icons/light/icon.svg",
+					"dark": "resources/icons/dark/icon.svg"
 				}
 			}
 		],
