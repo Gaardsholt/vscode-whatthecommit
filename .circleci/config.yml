@@ -92,6 +92,6 @@ workflows:
           name: build
           filters:
             branches:
-              only: master
+              ignore: /.*/
             tags:
               only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
