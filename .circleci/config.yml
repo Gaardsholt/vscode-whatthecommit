@@ -84,12 +84,12 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
-              ignore: /.*/
       - build:
           name: build
+          requires:
+            - test
           filters:
             tags:
-              only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+              only: /^v.*/
             branches:
               ignore: /.*/
