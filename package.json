@@ -20,7 +20,7 @@
 		"SCM Providers"
 	],
 	"activationEvents": [
-		"*"
+		"onCommand:extension.wtc.getCommitMessage"
 	],
 	"main": "./out/main.js",
 	"contributes": {
