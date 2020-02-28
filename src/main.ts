@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
-import * as rp from "request-promise";
-import { wtcJson } from "./wtcJson";
+import * as http from 'http';
 
 export async function activate(context: vscode.ExtensionContext) {
 	console.log('Successfully activated "WhatTheCommit"');
@@ -10,14 +9,19 @@ export async function activate(context: vscode.ExtensionContext) {
 			const gitExtension = vscode.extensions.getExtension('vscode.git').exports;
 			const repo = gitExtension.getAPI(1).repositories[0];
 
-			// vscode.window.showInformationMessage("Fetching commit message...");
-			rp({ uri: 'http://www.whatthecommit.com/index.json', json: true })
-				.then(function (htmlString: wtcJson) {
-					repo.inputBox.value = htmlString.commit_message;
-					// vscode.window.showInformationMessage(htmlString.commit_message);
-				})
-				.catch(function (err) {
-					vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err, {modal: true});
+			http.get("http://www.whatthecommit.com/index.json", (resp) => {
+				let data = '';
+				resp.on('data', (chunk) => {
+					data += chunk;
 				});
+				resp.on('end', () => {
+					let myData = JSON.parse(data);
+					repo.inputBox.value = myData.commit_message;
+					// vscode.window.showInformationMessage(myData.commit_message);
+				});
+			}).on("error", (err) => {
+				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, {modal: true});
+			});
+			
 		}));
 }
