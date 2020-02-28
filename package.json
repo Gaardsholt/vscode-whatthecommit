@@ -13,6 +13,10 @@
 	"bugs": {
 		"url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
 	},
+	"galleryBanner": {
+		"color": "#eff1f3",
+		"theme": "dark"
+	},
 	"engines": {
 		"vscode": "^1.38.0"
 	},
