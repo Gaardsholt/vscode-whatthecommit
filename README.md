@@ -1,7 +1,7 @@
 # vscode-WhatTheCommit
 
-[![CircleCI](https://img.shields.io/circleci/build/gh/Gaardsholt/vscode-whatthecommit?style=for-the-badge)](https://circleci.com/gh/Gaardsholt/vscode-whatthecommit)
-[![CircleCI](https://img.shields.io/visual-studio-marketplace/i/Gaardsholt.vscode-whatthecommit?style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=Gaardsholt.vscode-whatthecommit)
+[![CircleCI](https://img.shields.io/circleci/build/gh/Gaardsholt/vscode-whatthecommit)](https://circleci.com/gh/Gaardsholt/vscode-whatthecommit)
+[![CircleCI](https://img.shields.io/visual-studio-marketplace/i/Gaardsholt.vscode-whatthecommit)](https://marketplace.visualstudio.com/items?itemName=Gaardsholt.vscode-whatthecommit)
 
 
 This extension will fetch your next commit message from WhatTheCommit.com
