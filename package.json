@@ -10,6 +10,7 @@
 	},
 	"icon": "resources/images/icon.png",
 	"homepage": "https://github.com/Gaardsholt/vscode-whatthecommit/blob/master/README.md",
+	"license": "SEE LICENSE IN LICENSE",
 	"bugs": {
 		"url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
 	},
