@@ -6,24 +6,17 @@ executors:
       - image: circleci/node:latest
 
 commands:
-  install_envsubst:
-    description: Will install the package envsubst
-    steps:
-      - run:
-          name: Install envsubst
-          command: |
-            sudo apt install gettext
   update_version:
     description: Will update package.json with tag of the commit
     steps:
       - run:
           name: Update version
           command: |
-            cat ./package.json
-            envsubst < ./package.json > ./package_var.json
-            rm ./package.json
-            mv ./package_var.json ./package.json
-            cat ./package.json
+            if [[ ! -z ${CIRCLE_TAG} ]];
+            then
+              sed -i -e "s?1.0.0?$CIRCLE_TAG?g" ./package_var.json
+              mv ./package_var.json ./package.json
+            fi
   install_dependencies:
     description: Will install dependencies
     steps:
@@ -60,7 +53,6 @@ jobs:
     executor: node_image
     steps:
       - checkout
-      - install_envsubst
       - update_version
       - install_dependencies
       - compile
@@ -68,7 +60,6 @@ jobs:
     executor: node_image
     steps:
       - checkout
-      - install_envsubst
       - update_version
       - install_dependencies
       - compile

@@ -1,10 +1,10 @@
-import * as vscode from 'vscode';
 import * as http from 'http';
+import * as vscode from 'vscode';
 
 export async function activate(context: vscode.ExtensionContext) {
 	console.log('Successfully activated "WhatTheCommit"');
-	
-	context.subscriptions.push(vscode.commands.registerCommand("extension.wtc.getCommitMessage",
+
+	context.subscriptions.push(vscode.commands.registerCommand("wtc.getCommitMessage",
 		async () => {
 			const gitExtension = vscode.extensions.getExtension('vscode.git').exports;
 			const repo = gitExtension.getAPI(1).repositories[0];
@@ -20,8 +20,8 @@ export async function activate(context: vscode.ExtensionContext) {
 					// vscode.window.showInformationMessage(myData.commit_message);
 				});
 			}).on("error", (err) => {
-				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, {modal: true});
+				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, { modal: true });
 			});
-			
+
 		}));
 }

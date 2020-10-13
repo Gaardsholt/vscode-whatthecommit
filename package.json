@@ -2,7 +2,7 @@
 	"name": "vscode-whatthecommit",
 	"displayName": "WhatTheCommit",
 	"description": "Fetch your next commit message from WhatTheCommit.com",
-	"version": "$CIRCLE_TAG",
+	"version": "1.0.0",
 	"publisher": "Gaardsholt",
 	"repository": {
 		"type": "git",
@@ -21,13 +21,13 @@
 		"SCM Providers"
 	],
 	"activationEvents": [
-		"onCommand:extension.wtc.getCommitMessage"
+		"onStartupFinished"
 	],
 	"main": "./out/main.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.wtc.getCommitMessage",
+				"command": "wtc.getCommitMessage",
 				"title": "Get Commit Message",
 				"category": "WhatTheCommit",
 				"icon": {
@@ -39,7 +39,7 @@
 		"menus": {
 			"scm/title": [
 				{
-					"command": "extension.wtc.getCommitMessage",
+					"command": "wtc.getCommitMessage",
 					"group": "navigation@9",
 					"when": "scmProvider == git"
 				}
