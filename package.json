@@ -21,14 +21,17 @@
 		"SCM Providers"
 	],
 	"activationEvents": [
-		"onStartupFinished"
+		"*",
+    "onFileSystem:git"
 	],
-	"main": "./out/main.js",
+	"main": "./out/extension.js",
+	"extensionDependencies": ["vscode.git"],
 	"contributes": {
 		"commands": [
 			{
 				"command": "wtc.getCommitMessage",
 				"title": "Get Commit Message",
+				"enablement": "wtc.enabled",
 				"category": "WhatTheCommit",
 				"icon": {
 					"light": "resources/icons/light/icon.svg",
