@@ -21,7 +21,7 @@ commands:
     steps:
       - run:
           name: Install
-          command: npm install
+          command: npm ci
   compile:
     description: Will compile
     steps:
