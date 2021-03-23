@@ -35,10 +35,10 @@ commands:
           name: Install VS Code Extension Manager
           command: sudo npm i vsce -g
   vsce_package:
-    description: Packge vscode extension
+    description: Package vscode extension
     steps:
       - run:
-          name: Packge vscode extension
+          name: Package vscode extension
           command: vsce package
   vsce_publish:
     description: Publish to marketplace
