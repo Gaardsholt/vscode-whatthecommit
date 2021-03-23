@@ -20,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, { modal: true });
 			});
 
-		}));
-		
+		}, { repository: true }));
+
 		vscode.commands.executeCommand('setContext', 'wtc.enabled', true);
 }
