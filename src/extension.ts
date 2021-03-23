@@ -1,12 +1,14 @@
 import * as http from 'http';
 import * as vscode from 'vscode';
-import { Repository } from './git';
+import { GitExtension, Repository } from './git';
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log('Successfully activated "WhatTheCommit"');
-
+	
 	context.subscriptions.push(vscode.commands.registerCommand("wtc.getCommitMessage",
 		(repository: Repository) => {
+			repository = GetRepo(repository);
+
 			http.get("http://www.whatthecommit.com/index.json", (resp) => {
 				let data = '';
 				resp.on('data', (chunk) => {
@@ -23,4 +25,15 @@ export function activate(context: vscode.ExtensionContext) {
 		}, { repository: true }));
 
 		vscode.commands.executeCommand('setContext', 'wtc.enabled', true);
+}
+
+
+function GetRepo(repository: Repository | undefined): Repository {
+	if (repository === undefined) {
+		let gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
+		let api = gitExtension.getAPI(1);
+		repository = api.repositories[0];
+	}
+
+	return repository;
 }
