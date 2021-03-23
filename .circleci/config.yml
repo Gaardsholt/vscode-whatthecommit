@@ -48,13 +48,6 @@ commands:
           command: vsce publish -p $VS_TOKEN
 
 jobs:
-  test:
-    executor: node_image
-    steps:
-      - checkout
-      - update_version
-      - install_dependencies
-      - compile
   build:
     executor: node_image
     steps:
@@ -66,17 +59,10 @@ jobs:
       - vsce_package
 
 workflows:
-  test-deploy:
+  build-n-deploy:
     jobs:
-      - test:
-          name: test
-          filters:
-            tags:
-              only: /.*/
       - build:
           name: build
-          requires:
-            - test
           filters:
             tags:
               ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
@@ -84,8 +70,6 @@ workflows:
           name: build and publish
           post-steps:
             - vsce_publish
-          requires:
-            - test
           filters:
             tags:
               only: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
