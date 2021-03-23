@@ -64,7 +64,6 @@ jobs:
       - compile
       - vsce_install
       - vsce_package
-      - vsce_publish
 
 workflows:
   test-deploy:
@@ -76,6 +75,15 @@ workflows:
               only: /.*/
       - build:
           name: build
+          requires:
+            - test
+          filters:
+            tags:
+              ignore: /^(\*|\d+(\.\d+){0,2}(\.\*)?)$/
+      - build:
+          name: build and publish
+          post-steps:
+            - vsce_publish
           requires:
             - test
           filters:
