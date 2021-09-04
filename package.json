@@ -15,7 +15,7 @@
 		"url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
 	},
 	"engines": {
-		"vscode": "^1.57.1"
+		"vscode": "^1.60.0"
 	},
 	"categories": [
 		"SCM Providers"
