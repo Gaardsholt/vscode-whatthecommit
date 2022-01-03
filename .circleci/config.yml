@@ -33,7 +33,7 @@ commands:
     steps:
       - run:
           name: Install VS Code Extension Manager
-          command: npm i vsce -g
+          command: npm install --prefix=$HOME/.local --global vsce
   vsce_package:
     description: Package vscode extension
     steps:
@@ -50,8 +50,6 @@ commands:
 jobs:
   build:
     executor: node_image
-    environment:
-      NPM_CONFIG_PREFIX: ~/.npm-global
     steps:
       - checkout
       - update_version
