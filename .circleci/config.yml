@@ -39,7 +39,9 @@ commands:
     steps:
       - run:
           name: Package vscode extension
-          command: vsce package
+          command: |
+            export VSCE_PAT="debug"
+            vsce package
   vsce_publish:
     description: Publish to marketplace
     steps:
