@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node_image:
     docker:
-      - image: cimg/node:current
+      - image: cimg/node:lts
 
 commands:
   update_version:
@@ -28,25 +28,20 @@ commands:
       - run:
           name: Compile
           command: npm run compile
-  vsce_install:
-    description: Install VS Code Extension Manager
-    steps:
-      - run:
-          name: Install VS Code Extension Manager
-          command: sudo npm i vsce -g
   vsce_package:
     description: Package vscode extension
     steps:
       - run:
           name: Package vscode extension
-          command: vsce package
+          command: npm run package
   vsce_publish:
     description: Publish to marketplace
     steps:
       - run:
           name: Publish to marketplace
-          command: vsce publish -p $VS_TOKEN
-
+          command: |
+            export VSCE_PAT=$VS_TOKEN
+            npm run deploy
 jobs:
   build:
     executor: node_image
@@ -55,7 +50,6 @@ jobs:
       - update_version
       - install_dependencies
       - compile
-      - vsce_install
       - vsce_package
 
 workflows:
