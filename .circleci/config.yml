@@ -28,12 +28,6 @@ commands:
       - run:
           name: Compile
           command: npm run compile
-  vsce_install:
-    description: Install VS Code Extension Manager
-    steps:
-      - run:
-          name: Install VS Code Extension Manager
-          command: npm install --prefix=$HOME/.local --global vsce
   vsce_package:
     description: Package vscode extension
     steps:
@@ -56,12 +50,6 @@ jobs:
       - update_version
       - install_dependencies
       - compile
-      # - vsce_install
-      # - run:
-      #     name: debug stuff
-      #     command: |
-      #       node --version
-      #       vsce --version
       - vsce_package
 
 workflows:
