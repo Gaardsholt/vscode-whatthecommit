@@ -57,11 +57,11 @@ jobs:
       - install_dependencies
       - compile
       # - vsce_install
-      - run:
-          name: debug stuff
-          command: |
-            node --version
-            vsce --version
+      # - run:
+      #     name: debug stuff
+      #     command: |
+      #       node --version
+      #       vsce --version
       - vsce_package
 
 workflows:
