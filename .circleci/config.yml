@@ -39,16 +39,15 @@ commands:
     steps:
       - run:
           name: Package vscode extension
-          command: |
-            export VSCE_PAT="debug"
-            vsce package
+          command: npm run package
   vsce_publish:
     description: Publish to marketplace
     steps:
       - run:
           name: Publish to marketplace
-          command: vsce publish -p $VS_TOKEN
-
+          command: |
+            export VSCE_PAT=$VS_TOKEN
+            npm run deploy
 jobs:
   build:
     executor: node_image
@@ -57,7 +56,7 @@ jobs:
       - update_version
       - install_dependencies
       - compile
-      - vsce_install
+      # - vsce_install
       - run:
           name: debug stuff
           command: |
