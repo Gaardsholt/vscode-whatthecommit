@@ -55,7 +55,7 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"package": "vsce package",
+		"package": "yes | vsce package",
 		"deploy": "vsce deploy"
 	},
 	"devDependencies": {
