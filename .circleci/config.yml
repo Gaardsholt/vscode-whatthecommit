@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node_image:
     docker:
-      - image: cimg/node:current
+      - image: cimg/node:lts
 
 commands:
   update_version:
@@ -56,6 +56,11 @@ jobs:
       - install_dependencies
       - compile
       - vsce_install
+      - run:
+          name: debug stuff
+          command: |
+            node --version
+            vsce --version
       - vsce_package
 
 workflows:
