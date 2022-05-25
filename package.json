@@ -26,9 +26,6 @@
 	],
 	"main": "./out/extension.js",
 	"browser": "./out/extension.js",
-	"extensionDependencies": [
-		"vscode.git"
-	],
 	"contributes": {
 		"commands": [
 			{
