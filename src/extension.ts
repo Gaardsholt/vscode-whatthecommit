@@ -9,6 +9,8 @@ export function activate(context: vscode.ExtensionContext) {
 		(repository: Repository) => {
 			repository = GetRepo(repository);
 
+			const addPermalink = vscode.workspace.getConfiguration().get('wtc.addPermalink') as boolean;
+
 			http.get("http://www.whatthecommit.com/index.json", (resp) => {
 				let data = '';
 				resp.on('data', (chunk) => {
@@ -16,7 +18,8 @@ export function activate(context: vscode.ExtensionContext) {
 				});
 				resp.on('end', () => {
 					let myData = JSON.parse(data);
-					repository.inputBox.value = myData.commit_message;
+					const permaLink = addPermalink ? "\npermalink: " + myData.permalink : "";
+					repository.inputBox.value = myData.commit_message + permaLink;
 				});
 			}).on("error", (err) => {
 				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, { modal: true });
@@ -30,10 +33,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 function GetRepo(repository: Repository | undefined): Repository {
 	if (repository === undefined) {
-		let gitExtension = vscode.extensions.getExtension<GitExtension>('vscode.git').exports;
-		let api = gitExtension.getAPI(1);
-		repository = api.repositories[0];
+		let gitExtension = vscode?.extensions?.getExtension<GitExtension>('vscode.git')?.exports;
+		let api = gitExtension?.getAPI(1);
+		repository = api?.repositories[0];
 	}
 
-	return repository;
+	return repository as Repository;
 }
