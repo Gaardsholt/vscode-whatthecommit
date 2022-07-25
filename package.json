@@ -47,6 +47,16 @@
 					"when": "scmProvider == git"
 				}
 			]
+		},
+		"configuration": {
+			"title": "WhatTheCommit",
+			"properties": {
+				"wtc.addPermalink": {
+					"type": "boolean",
+					"default": false,
+					"description": "Add the permalink to the commit message."
+				}
+			}
 		}
 	},
 	"scripts": {
@@ -54,12 +64,29 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"package": "yes | vsce package",
-		"deploy": "vsce publish --allow-star-activation"
+		"deploy": "vsce publish --allow-star-activation",
+		"compile-web": "webpack",
+		"run-in-browser": "vscode-test-web --extensionId=vscode.git --browserType=chromium --extensionDevelopmentPath=. ."
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.35",
 		"@types/vscode": "^1.60.0",
+		"@types/webpack-env": "^1.17.0",
+		"@typescript-eslint/eslint-plugin": "^5.30.0",
+		"@typescript-eslint/parser": "^5.30.0",
+		"@vscode/test-web": "^0.0.26",
+		"assert": "^2.0.0",
+		"eslint": "^8.18.0",
+		"mocha": "^10.0.0",
+		"process": "^0.11.10",
+		"ts-loader": "^9.3.1",
 		"typescript": "^4.7.4",
-		"vsce": "^2.10.0"
+		"vsce": "^2.10.0",
+		"webpack": "^5.73.0",
+		"webpack-cli": "^4.10.0"
+	},
+	"dependencies": {
+		"stream-http": "^3.2.0",
+		"url": "^0.11.0"
 	}
 }
