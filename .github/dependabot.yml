@@ -11,3 +11,4 @@ updates:
       interval: "monthly"
     reviewers:
       - "gaardsholt"
+    open-pull-requests-limit: 10
