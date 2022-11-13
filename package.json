@@ -74,7 +74,7 @@
 		"@types/webpack-env": "^1.18.0",
 		"@typescript-eslint/eslint-plugin": "^5.38.1",
 		"@typescript-eslint/parser": "^5.42.0",
-		"@vscode/test-web": "^0.0.30",
+		"@vscode/test-web": "^0.0.32",
 		"assert": "^2.0.0",
 		"eslint": "^8.24.0",
 		"mocha": "^10.1.0",
