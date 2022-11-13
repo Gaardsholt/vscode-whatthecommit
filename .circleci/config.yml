@@ -14,7 +14,7 @@ commands:
           command: |
             if [[ ! -z ${CIRCLE_TAG} ]];
             then
-              npm version $CIRCLE_TAG
+              npm version --no-git-tag-version $CIRCLE_TAG
             fi
   install_dependencies:
     description: Will install dependencies
