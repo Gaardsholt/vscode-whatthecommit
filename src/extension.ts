@@ -1,4 +1,4 @@
-import * as http from 'http';
+import * as https from 'https';
 import * as vscode from 'vscode';
 import { GitExtension, Repository } from './git';
 
@@ -11,7 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 			const addPermalink = vscode.workspace.getConfiguration().get('wtc.addPermalink') as boolean;
 
-			http.get("http://www.whatthecommit.com/index.json", (resp) => {
+			https.get("https://www.whatthecommit.com/index.json", (resp) => {
 				let data = '';
 				resp.on('data', (chunk) => {
 					data += chunk;
