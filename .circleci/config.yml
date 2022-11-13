@@ -14,7 +14,7 @@ commands:
           command: |
             if [[ ! -z ${CIRCLE_TAG} ]];
             then
-              sed -i -e "s?1.0.0?$CIRCLE_TAG?g" ./package.json
+              npm version $CIRCLE_TAG
             fi
   install_dependencies:
     description: Will install dependencies
