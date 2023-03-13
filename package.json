@@ -70,7 +70,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^17.0.45",
-		"@types/vscode": "^1.60.0",
+		"@types/vscode": "^1.76.0",
 		"@types/webpack-env": "^1.18.0",
 		"@vscode/test-web": "^0.0.35",
 		"@typescript-eslint/parser": "^5.55.0",
