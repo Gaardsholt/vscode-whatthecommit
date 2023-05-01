@@ -1,0 +1,28 @@
+name: Auto Releaser
+
+on:
+  # Run manually
+  workflow_dispatch:
+  # Or on a schedule
+  schedule:
+    # run every monday at 9AM
+    - cron: '37 13 1 * *'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cardinalby/git-get-release-action@v1
+        id: get_release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          latest: true
+          draft: true
+          doNotFailIfNotFound: true
+      - uses: eregon/publish-release@v1
+        if: steps.get_release.outputs.id != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.get_release.outputs.id }}
