@@ -69,12 +69,12 @@
     "run-in-browser": "vscode-test-web --extensionId=vscode.git --browserType=chromium --extensionDevelopmentPath=. ."
   },
   "devDependencies": {
-    "@types/node": "^17.0.45",
+    "@types/node": "^18.11.9",
     "@types/vscode": "^1.60.0",
     "@types/webpack-env": "^1.18.1",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "@vscode/test-web": "^0.0.44",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@typescript-eslint/eslint-plugin": "^5.60.1",
     "assert": "^2.0.0",
     "eslint": "^8.45.0",
     "mocha": "^10.2.0",
