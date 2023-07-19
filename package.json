@@ -1,93 +1,93 @@
 {
-	"name": "vscode-whatthecommit",
-	"displayName": "WhatTheCommit",
-	"description": "Fetch your next commit message from WhatTheCommit.com",
-	"version": "1.0.0",
-	"publisher": "Gaardsholt",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Gaardsholt/vscode-whatthecommit"
-	},
-	"icon": "resources/images/icon.png",
-	"homepage": "https://github.com/Gaardsholt/vscode-whatthecommit/blob/master/README.md",
-	"license": "SEE LICENSE IN LICENSE",
-	"bugs": {
-		"url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
-	},
-	"engines": {
-		"vscode": "^1.60.0"
-	},
-	"categories": [
-		"SCM Providers"
-	],
-	"activationEvents": [
-		"*",
-		"onFileSystem:git"
-	],
-	"main": "./out/extension.js",
-	"browser": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "wtc.getCommitMessage",
-				"title": "Get Commit Message",
-				"enablement": "wtc.enabled",
-				"category": "WhatTheCommit",
-				"icon": {
-					"light": "resources/icons/light/icon.svg",
-					"dark": "resources/icons/dark/icon.svg"
-				}
-			}
-		],
-		"menus": {
-			"scm/title": [
-				{
-					"command": "wtc.getCommitMessage",
-					"group": "navigation@9",
-					"when": "scmProvider == git"
-				}
-			]
-		},
-		"configuration": {
-			"title": "WhatTheCommit",
-			"properties": {
-				"wtc.addPermalink": {
-					"type": "boolean",
-					"default": false,
-					"description": "Add the permalink to the commit message."
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"package": "yes | vsce package",
-		"deploy": "vsce publish --allow-star-activation",
-		"compile-web": "webpack",
-		"run-in-browser": "vscode-test-web --extensionId=vscode.git --browserType=chromium --extensionDevelopmentPath=. ."
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.45",
-		"@types/vscode": "^1.60.0",
-		"@types/webpack-env": "^1.18.1",
-		"@vscode/test-web": "^0.0.44",
-		"@typescript-eslint/parser": "^5.62.0",
-		"@typescript-eslint/eslint-plugin": "^5.60.1",
-		"assert": "^2.0.0",
-		"eslint": "^8.45.0",
-		"mocha": "^10.2.0",
-		"process": "^0.11.10",
-		"ts-loader": "^9.4.4",
-		"typescript": "^5.1.6",
-		"vsce": "^2.15.0",
-		"webpack": "^5.88.2",
-		"webpack-cli": "^5.1.4"
-	},
-	"dependencies": {
-		"https-browserify": "^1.0.0",
-		"stream-http": "^3.2.0",
-		"url": "^0.11.1"
-	}
+  "name": "vscode-whatthecommit",
+  "displayName": "WhatTheCommit",
+  "description": "Fetch your next commit message from WhatTheCommit.com",
+  "version": "1.0.0",
+  "publisher": "Gaardsholt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gaardsholt/vscode-whatthecommit"
+  },
+  "icon": "resources/images/icon.png",
+  "homepage": "https://github.com/Gaardsholt/vscode-whatthecommit/blob/master/README.md",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "SCM Providers"
+  ],
+  "activationEvents": [
+    "*",
+    "onFileSystem:git"
+  ],
+  "main": "./out/extension.js",
+  "browser": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wtc.getCommitMessage",
+        "title": "Get Commit Message",
+        "enablement": "wtc.enabled",
+        "category": "WhatTheCommit",
+        "icon": {
+          "light": "resources/icons/light/icon.svg",
+          "dark": "resources/icons/dark/icon.svg"
+        }
+      }
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "wtc.getCommitMessage",
+          "group": "navigation@9",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "WhatTheCommit",
+      "properties": {
+        "wtc.addPermalink": {
+          "type": "boolean",
+          "default": false,
+          "description": "Add the permalink to the commit message."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "yes | vsce package",
+    "deploy": "vsce publish --allow-star-activation",
+    "compile-web": "webpack",
+    "run-in-browser": "vscode-test-web --extensionId=vscode.git --browserType=chromium --extensionDevelopmentPath=. ."
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.45",
+    "@types/vscode": "^1.60.0",
+    "@types/webpack-env": "^1.18.1",
+    "@vscode/test-web": "^0.0.44",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "assert": "^2.0.0",
+    "eslint": "^8.45.0",
+    "mocha": "^10.2.0",
+    "process": "^0.11.10",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "vsce": "^2.15.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "https-browserify": "^1.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.1"
+  }
 }
