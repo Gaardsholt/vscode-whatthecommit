@@ -75,7 +75,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "@vscode/test-web": "^0.0.44",
-    "@vscode/vsce": "^2.20.0",
+    "@vscode/vsce": "^2.20.1",
     "assert": "^2.0.0",
     "eslint": "^8.46.0",
     "mocha": "^10.2.0",
