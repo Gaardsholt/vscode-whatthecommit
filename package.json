@@ -71,7 +71,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/vscode": "^1.76.0",
-    "@types/webpack-env": "^1.18.4",
+    "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vscode/test-web": "^0.0.54",
