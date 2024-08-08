@@ -13,7 +13,7 @@ updates:
       - "gaardsholt"
     open-pull-requests-limit: 10
     groups:
-      rubocop:
+      eslint:
         patterns:
         - "@typescript-eslint/*"
   - package-ecosystem: "github-actions" # See documentation for possible values
