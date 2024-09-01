@@ -16,6 +16,7 @@ updates:
       eslint:
         patterns:
         - "@typescript-eslint/*"
+        - "eslint"
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
