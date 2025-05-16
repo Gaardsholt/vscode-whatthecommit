@@ -9,8 +9,6 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
-    reviewers:
-      - "gaardsholt"
     open-pull-requests-limit: 10
     groups:
       eslint:
@@ -21,6 +19,4 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "monthly"
-    reviewers:
-      - "gaardsholt"
     open-pull-requests-limit: 10
