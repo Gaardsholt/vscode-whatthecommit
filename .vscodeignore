@@ -9,4 +9,4 @@ tsconfig.json
 .eslintrc.json
 **/*.map
 .circleci
-tslint.json
+eslint.config.mjs
