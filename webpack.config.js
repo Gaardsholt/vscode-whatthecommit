@@ -11,7 +11,7 @@
 
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
-import { ProvidePlugin } from "webpack";
+import webpack from "webpack";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
@@ -60,7 +60,7 @@ const webExtensionConfig = {
     ],
   },
   plugins: [
-    new ProvidePlugin({
+    new webpack.ProvidePlugin({
       process: "process/browser", // provide a shim for the global `process` variable
     }),
   ],
