@@ -15,23 +15,25 @@
     "url": "https://github.com/Gaardsholt/vscode-whatthecommit/issues"
   },
   "engines": {
-    "vscode": "^1.76.0"
+    "vscode": "^1.85.0"
   },
   "categories": [
     "SCM Providers"
   ],
   "activationEvents": [
-    "*",
-    "onFileSystem:git"
+    "onExtension:vscode.git"
   ],
-  "main": "./out/extension.js",
-  "browser": "./out/extension.js",
+  "extensionKind": [
+    "ui",
+    "workspace"
+  ],
+  "main": "./out/desktop/extension.js",
+  "browser": "./out/web/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "wtc.getCommitMessage",
         "title": "Get Commit Message",
-        "enablement": "wtc.enabled",
         "category": "WhatTheCommit",
         "icon": {
           "light": "resources/icons/light/icon.svg",
@@ -60,28 +62,31 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile && npm run compile-web",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "yes | vsce package",
+    "package": "vsce package --no-dependencies",
     "deploy": "vsce publish --allow-star-activation",
-    "compile-web": "webpack",
-    "run-in-browser": "vscode-test-web --extensionId=vscode.git --browserType=chromium --extensionDevelopmentPath=. ."
+    "compile-web": "webpack --mode production",
+    "watch-web": "webpack --mode development --watch",
+    "run-in-browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. ."
   },
   "devDependencies": {
+    "@eslint/js": "^9.29.0",
     "@types/node": "^24.0.3",
-    "@types/vscode": "^1.76.0",
+    "@types/vscode": "^1.85.0",
     "@types/webpack-env": "^1.18.8",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.31.1",
     "@vscode/test-web": "^0.0.70",
     "@vscode/vsce": "^3.5.0",
     "assert": "^2.1.0",
-    "eslint": "^9.28.0",
+    "eslint": "^9.29.0",
     "mocha": "^11.7.0",
     "process": "^0.11.10",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.34.1",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1"
   },

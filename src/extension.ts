@@ -1,42 +1,97 @@
-import * as https from 'https';
-import * as vscode from 'vscode';
-import { GitExtension, Repository } from './git';
+import * as https from "https";
+import * as vscode from "vscode";
+import { GitExtension, Repository } from "./git";
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Successfully activated "WhatTheCommit"');
-	
-	context.subscriptions.push(vscode.commands.registerCommand("wtc.getCommitMessage",
-		(repository: Repository) => {
-			repository = GetRepo(repository);
+  console.log('Successfully activated "WhatTheCommit"');
 
-			const addPermalink = vscode.workspace.getConfiguration().get('wtc.addPermalink') as boolean;
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "wtc.getCommitMessage",
+      async (repository: Repository) => {
+        const repo = getRepository(repository);
+        if (!repo) {
+          vscode.window.showErrorMessage("No Git repository found.");
+          return;
+        }
 
-			https.get("https://www.whatthecommit.com/index.json", (resp) => {
-				let data = '';
-				resp.on('data', (chunk) => {
-					data += chunk;
-				});
-				resp.on('end', () => {
-					let myData = JSON.parse(data);
-					const permaLink = addPermalink ? "\npermalink: " + myData.permalink : "";
-					repository.inputBox.value = myData.commit_message + permaLink;
-				});
-			}).on("error", (err) => {
-				vscode.window.showErrorMessage("Unable to connect to whatthecommit.com: " + err.message, { modal: true });
-			});
+        const addPermalink = vscode.workspace
+          .getConfiguration()
+          .get("wtc.addPermalink") as boolean;
 
-		}, { repository: true }));
+        try {
+          const commit = await fetchWhatTheCommitMessage();
+          const permaLink = addPermalink
+            ? `\n\npermalink: ${commit.permalink}`
+            : "";
+          repo.inputBox.value = `${commit.commit_message}${permaLink}`;
+        } catch (err: unknown) {
+          let message = "Unknown error";
+          if (err instanceof Error) {
+            message = err.message;
+          }
+          vscode.window.showErrorMessage(
+            `Failed to fetch commit message: ${message}`,
+            { modal: true }
+          );
+        }
+      },
+      { repository: true }
+    )
+  );
 
-		vscode.commands.executeCommand('setContext', 'wtc.enabled', true);
+  vscode.commands.executeCommand("setContext", "wtc.enabled", true);
 }
 
+function getRepository(
+  repository: Repository | undefined
+): Repository | undefined {
+  if (repository) {
+    return repository;
+  }
 
-function GetRepo(repository: Repository | undefined): Repository {
-	if (repository === undefined) {
-		let gitExtension = vscode?.extensions?.getExtension<GitExtension>('vscode.git')?.exports;
-		let api = gitExtension?.getAPI(1);
-		repository = api?.repositories[0];
-	}
+  const gitExtension =
+    vscode.extensions.getExtension<GitExtension>("vscode.git")?.exports;
+  const api = gitExtension?.getAPI(1);
+  return api?.repositories[0];
+}
 
-	return repository as Repository;
+interface WhatTheCommitResponse {
+  commit_message: string;
+  permalink: string;
+}
+
+function fetchWhatTheCommitMessage(): Promise<WhatTheCommitResponse> {
+  return new Promise((resolve, reject) => {
+    https
+      .get("https://www.whatthecommit.com/index.json", (resp) => {
+        if (
+          resp.statusCode &&
+          (resp.statusCode < 200 || resp.statusCode >= 300)
+        ) {
+          return reject(new Error(`HTTP status code ${resp.statusCode}`));
+        }
+
+        let data = "";
+        resp.on("data", (chunk) => {
+          data += chunk;
+        });
+        resp.on("end", () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e: unknown) {
+            reject(
+              new Error(
+                `Failed to parse response: ${
+                  e instanceof Error ? e.message : String(e)
+                }`
+              )
+            );
+          }
+        });
+      })
+      .on("error", (err) => {
+        reject(err);
+      });
+  });
 }
