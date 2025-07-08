@@ -1,0 +1,36 @@
+name: build
+
+on:
+  release:
+    types:
+      - published
+  pull_request:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update version
+        if: ${{ github.event_name == 'release' }}
+        run: npm version --no-git-tag-version ${{ github.ref_name }}
+
+      - name: NPM install
+        run: npm ci
+
+      - name: Compile
+        run: npm run compile
+
+      - name: Compile web
+        run: npm run compile-web
+
+      - name: Package vscode extension
+        run: npm run package
+
+      - name: Publish to marketplace
+        if: ${{ github.event_name == 'release' }}
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: npm run deploy
