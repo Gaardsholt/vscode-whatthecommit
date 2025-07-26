@@ -47,7 +47,7 @@
         {
           "command": "wtc.getCommitMessage",
           "group": "navigation@9",
-          "when": "scmProvider == 'git'"
+          "when": "scmProvider == git"
         }
       ]
     },
