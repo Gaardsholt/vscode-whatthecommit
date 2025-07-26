@@ -62,7 +62,7 @@ interface WhatTheCommitResponse {
 
 async function fetchWhatTheCommitMessage(): Promise<WhatTheCommitResponse> {
   const response = await fetch("https://whatthecommit.com/index.json");
-  if (!response.ok || response.status < 200 || response.status >= 300) {
+  if (!response.ok) {
     throw new Error(
       `HTTP request failed with status code ${response.status}: ${response.statusText}`
     );
