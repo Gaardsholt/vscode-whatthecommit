@@ -1,4 +1,3 @@
-import * as https from "https";
 import * as vscode from "vscode";
 import { GitExtension, Repository } from "./git";
 
@@ -61,37 +60,10 @@ interface WhatTheCommitResponse {
   permalink: string;
 }
 
-function fetchWhatTheCommitMessage(): Promise<WhatTheCommitResponse> {
-  return new Promise((resolve, reject) => {
-    https
-      .get("https://www.whatthecommit.com/index.json", (resp) => {
-        if (
-          resp.statusCode &&
-          (resp.statusCode < 200 || resp.statusCode >= 300)
-        ) {
-          return reject(new Error(`HTTP status code ${resp.statusCode}`));
-        }
-
-        let data = "";
-        resp.on("data", (chunk) => {
-          data += chunk;
-        });
-        resp.on("end", () => {
-          try {
-            resolve(JSON.parse(data));
-          } catch (e: unknown) {
-            reject(
-              new Error(
-                `Failed to parse response: ${
-                  e instanceof Error ? e.message : String(e)
-                }`
-              )
-            );
-          }
-        });
-      })
-      .on("error", (err) => {
-        reject(err);
-      });
-  });
+async function fetchWhatTheCommitMessage(): Promise<WhatTheCommitResponse> {
+  const response = await fetch("https://whatthecommit.com/index.json");
+  if (!response.ok) {
+    throw new Error(`HTTP status code ${response.status}`);
+  }
+  return await response.json();
 }
