@@ -1,13 +1,13 @@
 name: build
 
-permissions:
-  contents: read
-
 on:
   release:
     types:
       - published
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   build:
