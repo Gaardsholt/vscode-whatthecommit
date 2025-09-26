@@ -8,10 +8,11 @@ on:
     # At 13:37 on day-of-month 7.
     - cron: '37 13 7 * *'
 
+permissions:
+  contents: write
+
 jobs:
   release:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: cardinalby/git-get-release-action@v1
