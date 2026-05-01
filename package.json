@@ -85,7 +85,7 @@
     "eslint": "^10.1.0",
     "mocha": "^11.7.5",
     "process": "^0.11.10",
-    "ts-loader": "^9.5.4",
+    "ts-loader": "^9.5.7",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.0",
     "webpack": "^5.105.4",
