@@ -89,7 +89,7 @@
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
     "webpack": "^5.108.4",
-    "webpack-cli": "^7.1.0"
+    "webpack-cli": "^7.2.1"
   },
   "dependencies": {}
 }
